@@ -12,7 +12,7 @@ const $=id=>document.getElementById(id),money=v=>v.toLocaleString('pt-BR',{style
 let tab='geral',discount=0,term=null;
 const terms=[24,36,48,60], factors=[.058,.043,.036,.031];
 function field(id,title,value,parent){const l=document.createElement('label');l.textContent=title;const i=document.createElement('input');i.type='number';i.min=0;i.step='any';i.id=id;i.value=value;i.required=true;i.addEventListener('input',render);l.append(i);$(parent).append(l)}
-[['price','Preço placa (R$)',81690],['bonus','Bônus (R$)',9500],['entry','Entrada (R$)',20000],['trade','Carro na troca (R$)',0]].forEach(a=>field(...a,'generalFields'));
+[['price','Preço placa (R$)],['bonus','Bônus (R$)],['entry','Entrada (R$)',20000],['trade','Carro na troca (R$)',0]].forEach(a=>field(...a,'generalFields'));
 field('direct','Valor financiado (R$)',52190,'directFields');terms.forEach((t,i)=>field('factor'+i,'Fator · '+t+'x',factors[i],'config'));
 field('spf2','SPF fixo · 48x (R$)',67.638239999999996,'config');field('spf3','SPF fixo · 60x (R$)',50.154590000000006,'config');
 [['refAmount','Financiado de referência (R$)',70000],['refPayment','Parcela de referência (R$)',2789],['newAmount','Novo financiado (R$)',56000]].forEach(a=>field(...a,'realFields'));
