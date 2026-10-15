@@ -12,10 +12,10 @@ const $=id=>document.getElementById(id),money=v=>v.toLocaleString('pt-BR',{style
 let tab='geral',discount=0,term=null;
 const terms=[24,36,48,60], factors=[.058,.043,.036,.031];
 function field(id,title,value,parent){const l=document.createElement('label');l.textContent=title;const i=document.createElement('input');i.type='number';i.min=0;i.step='any';i.id=id;i.value=value;i.required=true;i.addEventListener('input',render);l.append(i);$(parent).append(l)}
-[['price','Preço placa (R$)],['bonus','Bônus (R$)],['entry','Entrada (R$)',20000],['trade','Carro na troca (R$)',0]].forEach(a=>field(...a,'generalFields'));
-field('direct','Valor financiado (R$)',52190,'directFields');terms.forEach((t,i)=>field('factor'+i,'Fator · '+t+'x',factors[i],'config'));
+[['price','Preço placa (R$)',0],['bonus','Bônus (R$)',0],['entry','Entrada (R$)',0],['trade','Carro na troca (R$)',0]].forEach(a=>field(...a,'generalFields'));
+field('direct','Valor financiado (R$)',0,'directFields');terms.forEach((t,i)=>field('factor'+i,'Fator · '+t+'x',factors[i],'config'));
 field('spf2','SPF fixo · 48x (R$)',67.638239999999996,'config');field('spf3','SPF fixo · 60x (R$)',50.154590000000006,'config');
-[['refAmount','Financiado de referência (R$)',70000],['refPayment','Parcela de referência (R$)',2789],['newAmount','Novo financiado (R$)',56000]].forEach(a=>field(...a,'realFields'));
+[['refAmount','Financiado de referência (R$)',0],['refPayment','Parcela de referência (R$)',0],['newAmount','Novo financiado (R$)',56000]].forEach(a=>field(...a,'realFields'));
 [0,2,3,4,5,5.5,6,6.5,7,7.5,8,8.5].forEach(p=>{const b=document.createElement('button');b.textContent=p?p.toLocaleString('pt-BR')+'%':'Sem desconto';b.dataset.p=p;b.className=p>=7?'high':p>=5.5?'medium':'';b.onclick=()=>{discount=p;render()};$('discounts').append(b)});
 terms.forEach((t,i)=>{const row=document.createElement('tr');row.innerHTML='<td><label><input type="radio" name="term" aria-label="Selecionar '+t+' parcelas" id="term'+i+'">'+t+'x</label></td><td id="base'+i+'"></td><td><input type="checkbox" id="noSpf'+i+'" aria-label="Retirar SPF de '+t+' parcelas"></td>';$('terms').append(row);$('term'+i).onchange=()=>{term=i;render()};$('noSpf'+i).onchange=render});
 function num(id){const e=$(id);return e.value===''?NaN:Number(e.value)}
